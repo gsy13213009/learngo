@@ -1,8 +1,8 @@
 package main
 
 import (
+	"../../tree"
 	"fmt"
-	"learngo/tree"
 )
 
 func main() {
