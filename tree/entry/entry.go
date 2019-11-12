@@ -4,6 +4,7 @@ import (
 	"../../tree"
 	"fmt"
 )
+
 // 使用组合的方式，扩展tree.Node
 type myNode struct {
 	node *tree.Node

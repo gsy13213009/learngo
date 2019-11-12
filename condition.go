@@ -21,10 +21,10 @@ func main() {
 		grade(4),
 	)
 	fmt.Println(
-			converToBin(13),
-			converToBin(1),
-			converToBin(0),
-		)
+		converToBin(13),
+		converToBin(1),
+		converToBin(0),
+	)
 }
 
 func grade(score int) string {

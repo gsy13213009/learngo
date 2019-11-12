@@ -4,7 +4,9 @@ import (
 	"../retriever/real"
 	"fmt"
 )
+
 const url = "http://www.imooc.com"
+
 // 定义接口
 type Retriever interface {
 	Get(url string) string
@@ -40,6 +42,6 @@ func download(r Retriever) string {
 func main() {
 	//r := mock.Retriever{Contents: "hhhhhh"}
 	raa := real.Retriever{}
-	
+
 	fmt.Println(download(raa))
 }

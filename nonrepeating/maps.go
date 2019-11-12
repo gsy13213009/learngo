@@ -40,7 +40,7 @@ func main() {
 // lastOccurred[x] 不存在，或者 < start -> 无需操作
 // lastOccurred[x] >= start -> 更新start
 // 更新lastOccurred[x] ,更新maxLength
-func lengthOfNonRepeating(s string) {
+func lengthOfNonRepeating(s string) int {
 	lastOccurred := make(map[int32]int)
 	start, maxLength := 0, 0
 	for i, ch := range []rune(s) { // 转成rune，就是国际化的
@@ -54,6 +54,7 @@ func lengthOfNonRepeating(s string) {
 		lastOccurred[ch] = i
 	}
 	fmt.Println(s, " max = ", maxLength)
+	return maxLength
 }
 func lengthOfNonRepeatingRoune() {
 	// 每个中文3字节, UTF-8编码，可变长，英文1字节，中文3字节

@@ -13,6 +13,7 @@ var (
 	bb     = true
 	heihei = 11
 )
+
 // 方法内的变量必须使用，否则会报错
 func variable() {
 	var a int
@@ -49,8 +50,8 @@ func consts() {
 func enums() {
 	// 普通枚举类型
 	const (
-		cpp = 0
-		java = 1
+		cpp    = 0
+		java   = 1
 		python = 2
 		golang = 3
 	)

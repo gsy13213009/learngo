@@ -12,10 +12,12 @@ type Node struct {
 func (node Node) Print() {
 	fmt.Print(node.Value)
 }
+
 // 只有使用*才能修改值，因为值传递的原因，只能传指针进来才行
 func (node *Node) SetValue(value int) {
 	node.Value = value
 }
+
 // node的中序遍历
 func (node *Node) Traverse() {
 	if node == nil {

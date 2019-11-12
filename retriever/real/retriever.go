@@ -8,7 +8,7 @@ import (
 
 type Retriever struct {
 	UserAgent string
-	TimeOut time.Duration
+	TimeOut   time.Duration
 }
 
 func (r Retriever) Get(url string) string {

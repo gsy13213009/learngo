@@ -14,6 +14,6 @@ func (q *Queue) Pop() int {
 	return head
 }
 
-func (q *Queue)IsEmpty() bool {
+func (q *Queue) IsEmpty() bool {
 	return len(*q) == 0
 }
