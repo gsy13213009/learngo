@@ -68,3 +68,53 @@ func Test_Cron(t *testing.T) {
 	})
 	time.Sleep(10 * time.Second)
 }
+
+// 调度多个任务
+
+type CronJob struct {
+	expr     *cronexpr.Expression
+	nextTime time.Time
+}
+
+func Test_Crons(t *testing.T) {
+	// 需要有1个调度协程, 定时检测所有的cron任务, 谁过期了就执行谁
+	now := time.Now()
+	expr := cronexpr.MustParse("*/5 * * * * * *")
+	cronJob := &CronJob{
+		expr:     expr,
+		nextTime: expr.Next(now),
+	}
+	scheduleTable := map[string]*CronJob{}
+	// 任务注册到调度表
+	scheduleTable["job1"] = cronJob
+
+	now2 := time.Now()
+	expr2 := cronexpr.MustParse("*/5 * * * * * *")
+	cronJob2 := &CronJob{
+		expr:     expr2,
+		nextTime: expr.Next(now2),
+	}
+	// 任务注册到调度表
+	scheduleTable["job2"] = cronJob2
+	// 启动调度协程
+	go func() {
+		for {
+			now := time.Now()
+			for jobName, cronJob := range scheduleTable {
+				// 判断是否过期
+				if cronJob.nextTime.Before(now) || cronJob.nextTime.Equal(now) {
+					// 启动一个携程, 去之执行这个任务
+					go func(name string) {
+						fmt.Println("执行:", jobName)
+					}(jobName)
+					cronJob.nextTime = cronJob.expr.Next(now)
+					fmt.Println("下次执行时间:", cronJob.nextTime)
+				}
+			}
+			select {
+			case <- time.NewTimer(100 * time.Microsecond).C:// 将在100ms后可读, 返回
+			}
+		}
+	}()
+	time.Sleep(100 * time.Second)
+}
